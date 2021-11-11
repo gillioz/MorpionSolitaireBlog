@@ -1,7 +1,7 @@
-Hello and welcome to this blog. Edit the `index.md` file to change this content. All pages on the blog, including this one, use [Markdown](https://guides.github.com/features/mastering-markdown/). You can include images:
+Hi! My name is Marc Gillioz.
 
-![Image of fast.ai logo](images/logo.png)
+I am a theoretical physicist, specialized in [conformal field theory](https://en.wikipedia.org/wiki/Conformal_field_theory).
+Besides my academic activities (see [my publications at arxiv.org](https://arxiv.org/a/gillioz_m_1.html)), I am also a deep learning enthusiast.
 
-## This is a title
-
-And you can include links, like this [link to fast.ai](https://www.fast.ai). Posts will appear after this file. 
+This blog describes a project that I have started in my free time after attending the [fast.ai](https://www.fast.ai/) online course.
+I hope that you will have as much fun reading about it as I had putting it together.
