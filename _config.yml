@@ -6,8 +6,8 @@
 # https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
 # https://learnxinyminutes.com/docs/yaml/
 
-title: Marc Gillioz's blog
-description: This blog describes my first expericences with deep learning.
+title: Deep Learning Morpion Solitaire - Marc Gillioz's blog
+description: My first expericences with deep learning applied to a nice pen-and-paper game
 github_username: gillioz
 
 # Email and twitter are optional:
