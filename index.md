@@ -1,7 +1,9 @@
-Hi! My name is Marc Gillioz.
+My name is Marc Gillioz, and I am [a theoretical physicist working on quantum field theory](about.html). Besides my academic activities, I am also an AI enthusiast. This blog describes a project that I have started after attending the [*fast.ai*](https://www.fast.ai/) online course.
 
-I am a theoretical physicist, specialized in [conformal field theory](https://en.wikipedia.org/wiki/Conformal_field_theory).
-Besides my academic activities (see [my publications at arxiv.org](https://arxiv.org/a/gillioz_m_1.html)), I am also a deep learning enthusiast.
+My goal is to use deep learning to explore the dynamics of a simple paper-and-paper game called *Morpion Solitaire*, and my modest results are presented in a series of blog posts:
 
-This blog describes a project that I have started in my free time after attending the [fast.ai](https://www.fast.ai/) online course.
-I hope that you will have as much fun reading about it as I had putting it together.
+1. [**The game**](2021/11/29/Part_1_Game.html): What is the game about? Why is this an interesting framework for deep learning?
+1. **The data** (upcoming): What is the data used for deep learning? How is it organized?
+1. **A simple problem** (upcoming): How a simple model can be used to answer a simple yes/no question.
+
+I hope that you will have as much fun reading about my project as I had putting it together. Enjoy!
