@@ -15,7 +15,7 @@ The drawback is that the convolutional kernel must be large enough so that a com
 Past this layer, the rest of the neural network only needs to implement a logic OR gate: if any allowed move is detected by the convolutional layer, the final answer is a *yes*; if no allowed move is detected, the final answer is a *no*.
 Few linear layers and channels are sufficient to do so. After some experimentation, we find that the following network architecture is fine for our problem:
 
-![png](Part_3_Binary_problem_images/Democritus_architecture.png 'Network architecture')
+![png](/images/Democritus_architecture.png 'Network architecture')
 
 This is one convolutional layer followed by 3 linear layers, with non-linearities given by max pooling after the first and rectified linear units (ReLu) between subsequent layers. The dimension of each layer's input and output is indicated on to the arrows. Note that the large number of channels after the first layer (40) is immediately taken down to a very small number in the linear layers (4 channels and less).
 
