@@ -76,5 +76,5 @@ On the one hand the situation in which the network gives a wrong answer is rare 
 
 On the other hand, it is also clear that better performances could be obtained with a deeper network. With a single convolutional layer followed by max pooling, obtaining a 100% perfect answer would require to combine different channels in a very non-trivial way, whereas the current training process found a simple alternative in which a single channel detects the presence or absence of an allowed move with 99% accuracy. Adding just one another layer before max pooling would for instance be sufficient to discriminate between the distinct outputs of the first layer (+4 vs. +5 in the case discussed above).
 
-In [the next part](/), we will precisely consider such a deeper network and try to answer a slightly more complicated question, before we dive into the core of the problem.
+In [the next part](/2022/01/28/Part_4_Counting.html), we will precisely consider such a deeper network and try to answer a slightly more complicated question, before we dive into the core of the problem.
 
