@@ -6,11 +6,11 @@ The goal is to use **deep learning** to explore the dynamics of a simple paper-a
 
 My approach is presented in a series of blog posts:
 
-1. [**The game**](2021/11/29/Part_1_Game.html): What is the game about? Why is this an interesting framework for deep learning?
-2. [**The data**](2022/01/05/Part_2_Data.html): What is the data used for deep learning? How is it organized?
+1. [**The game**](/2021/11/29/Part_1_Game.html): What is the game about? Why is this an interesting framework for deep learning?
+2. [**The data**](/2022/01/05/Part_2_Data.html): What is the data used for deep learning? How is it organized?
 3. [**A simple binary problem**](/2022/01/07/Part_3_Binary_problem.html): Answering a yes/no question with a basic model.
-4. **Going deeper with a counting problem** (coming up): Solving a more complicated problem with a deeper network.
-5. **Playing with a model** (coming up): How do we use the model to play better?
+4. [**Going deeper with a counting problem**](/2022/01/28/Part_4_Counting.html): Solving a more complicated problem with a deeper network.
+5. **Playing with a model** (coming up): How do we use the model to improve our exploration of the game.
 6. ...
 
 This is on-going work, so stay tuned for updates (subscribe to the [RSS feed](/feed.xml)).
