@@ -91,7 +91,7 @@ The accuracy of the model is measured comparing $n$ and $n'$. The following figu
 ![png](/images/Descartes_error.png 'The error rates, decreasing as the training advances.')
 
 The darker line is the exact error rate (how often $n' \neq n$), and the lighter lines the error rate with a tolerance of $\pm 1$ (how often $\left| n' - n \right| > 1$) and $\pm 2$ (lightest line).
-As you can see, all errors are nicely decreasing as the training advances. After 100 epochs the network already predicts the right number with $\pm 2$ tolerance with 0.1% error. 300 epochs are needed to reach the same accuracy with $\pm 1$ tolerance. Finally, after 500 epochs the network makes an exact prediction more than 98% of the time, and when it fails it is always with at most by one move.
+As you can see, all errors are nicely decreasing as the training advances. After 100 epochs the network already predicts the right number with $\pm 2$ tolerance with 0.1% error. 300 epochs are needed to reach the same accuracy with $\pm 1$ tolerance. Finally, after 500 epochs the network makes an exact prediction more than 98% of the time, and when it fails it is always by at most one move.
 
 It looks like the training could be pushed even further, but I decided to stop here. This is already quite a remarkable result! 
 
