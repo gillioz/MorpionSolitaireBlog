@@ -71,10 +71,13 @@ It turns out that a simple way of getting a pretty good distribution is to play 
 Okay, let's be honest: this is far from being perfectly uniform. But all labels between 0 and 28 have a significant probability of being realized, and that is just what we need. Final configurations with no possible moves are slightly under-represented, but this won't be a problem since we are working with a model that is already pre-trained to detect this special case.
 
 The next step is to turn this label (a positive integer , let's call it $n$,) into a real number $y$ that can more easily be fitted with the model. We will use
+
 $$
 y = \frac{n}{n + 5}
 $$
+
 $y$ is now in the interval $[0, 1]$: it is zero if there are no possible moves $(n = 0)$, and it approaches 1 if there are many of them $(n \to \infty)$. This choice gives a mean value $\mu(y) \approx 0.6$, and a standard deviation $\sigma(y) \approx 0.2$. The variable $y$ is the value that the network will try to match. From its output $y'$, we recover the estimated number of possible moves $n'$ using the inverse relation
+
 $$
 n' = \frac{5 y'}{1 - y'}
 $$
@@ -82,6 +85,7 @@ $$
 ### The result
 
 The training process is setup to minimize a loss function corresponding to the mean square error between $n$ (the label) and $n'$ (the prediction). However, to avoid dealing with singular values of $n'$ when the output is close to $y' = 1$, we use instead the following function, which is regular everywhere in $y'$:
+
 $$
 L(y, y') = \left( \frac{y - y'}{1 - y} \right)^2
 $$
