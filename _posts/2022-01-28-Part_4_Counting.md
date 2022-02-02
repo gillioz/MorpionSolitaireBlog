@@ -53,7 +53,7 @@ It turns out that training this model is difficult. So difficult in fact that it
 
 - In the first step, we train the new model on the old problem, starting with pre-trained convolutional layers (they share the same architecture) and randomly-initialized linear layers. This is done precisely as before, except from the fact that we use twice the learning rate (0.02) as most of the parameters are readily trained. The outcome of this procedure is summarized in this figure:
 
-![png](/images/Descartes_binary_accuracy.png 'Many periods are neede even though the model is partly pre-trained.')
+![png](/images/Descartes_binary_accuracy.png 'Many epochs are needed even though the model is partly pre-trained.')
 
 After around 30 epochs of stagnation, the accuracy increases steadily all the way to 99.5%. This is quite a laborious learning curve, given that most of the model was actually pre-trained, but the objective is attained: our new model with an average pooling layer gives an acceptable answer. 
 
