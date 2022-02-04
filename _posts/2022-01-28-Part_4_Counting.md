@@ -112,7 +112,7 @@ Playing a number of games starting with this configuration, I could verify that 
 
 ### Looking forward
 
-Of course, the problem addressed here does not require deep learning: counting the number of possible moves for a given configuration is something that can easily be done in an algorithmic way. The neural network is nice as it can compute this number for many grids at once, hence slightly accelerating the process: it will in fact be used in [the next post]() to try and improve our initial random exploration algorithm. But the two important goals that have been achieved are different:
+Of course, the problem addressed here does not require deep learning: counting the number of possible moves for a given configuration is something that can easily be done in an algorithmic way. The neural network is nice as it can compute this number for many grids at once, hence slightly accelerating the process: it will in fact be used in [the next post](/2022/02/04/Part_5_Playing_model.html) to try and improve our initial random exploration algorithm. But the two important goals that have been achieved are different:
 
 - This is a **proof of principle**: I was able to define a relatively deep model and train it to solve a regression problem that is not so simple. All ingredients needed for tackling the real problem are essentially present here.
 - This is also a valuable model to be later used in a **transfer learning** process. As we saw, this is key for making real progress.
