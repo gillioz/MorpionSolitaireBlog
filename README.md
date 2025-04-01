@@ -1,3 +1,3 @@
-# Your blog
+# Morpion Solitaire Blog
 
-This is the repository for your blog! Click *_config.yml* above to get started and fill in the details. Then click *index.md* and edit it to start creating your home page.
+This is the repository for a blog about Deep Learning Morpion Solitaire. See the other repo for the source code: [gillioz/MorpionSolitaire](https://github.com/gillioz/MorpionSolitaire).
