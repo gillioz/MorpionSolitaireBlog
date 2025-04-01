@@ -7,18 +7,14 @@
 # https://learnxinyminutes.com/docs/yaml/
 
 title: Deep Learning Morpion Solitaire - Marc Gillioz's blog
-description: My first expericences with deep learning applied to a nice pen-and-paper game
+description: Deep learning applied to a nice pen-and-paper game
 github_username: gillioz
 
 # Email and twitter are optional:
 email: marc.gillioz at gmail
-twitter_username: MarcGillioz
 
 # Set this to true to get LaTeX math equation support
 use_math: True
-
-# Add your Google Analytics ID here if you have one and want to use it
-google_analytics: 
 
 # Everything below here can be ignored, unless you want to change the theme entirely
 theme: minima
