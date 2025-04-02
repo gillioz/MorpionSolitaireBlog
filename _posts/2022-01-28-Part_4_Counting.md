@@ -1,6 +1,6 @@
 # Part 4: Going deeper with a counting problem
 
-This project is about *deep* learning, but nothing has been remotely deep so far. The model discussed in [the last part](/2022/01/07/Part_3_Binary_problem.html) was so shallow that it could have easily been trained by hand!
+This project is about *deep* learning, but nothing has been remotely deep so far. The model discussed in [the last part]({{ site.baseurl }}/2022/01/07/Part_3_Binary_problem.html) was so shallow that it could have easily been trained by hand!
 
 In this post, we will explore the possibility of training a deeper neural network, one in which we will give up control and let the data speak for itself. Not only that, but we will also address a more complicated problem: *counting* how many moves are possible on a given grid.
 
@@ -16,22 +16,22 @@ After that, we add four more convolutional layer with kernel size 2 x 2. Their r
 
 To keep track of sufficiently many possible combinations of neighboring blocks, we use 40 channels in each layer (a bit less in the first layer). This number is motivated by the fact that there are eventually 5 combinations of lines and dots in 4 directions that give a possible move, and therefore 20 different features to discover. Using twice as many channel should be sufficient to do so.
 
-The rest of the network consists of a pooling layer, followed by a couple of linear layers to turn the output into a single number. As a warm-up, we train the network on the same problem as [last time](/2022/01/07/Part_3_Binary_problem.html). For this we use max pooling and two linear layers only.
+The rest of the network consists of a pooling layer, followed by a couple of linear layers to turn the output into a single number. As a warm-up, we train the network on the same problem as [last time]({{ site.baseurl }}/2022/01/07/Part_3_Binary_problem.html). For this we use max pooling and two linear layers only.
 
 In summary, the network architecture is the following:
 
-![png](/images/Bacon_archi.png 'A deeper network for the same problem.')
+![png]({{ site.baseurl }}/images/Bacon_archi.png 'A deeper network for the same problem.')
 
 This model has 23,801 trainable parameters. This more than three times as many as our last model!
 
 ### Training on the binary problem
 
 The larger number of parameters together with the new depth of this network increases the risk of overfitting the data. Indeed, if we use a static set of 20,000 grids as we did last time, the network easily reaches 100% accuracy on the training set, while saturating at around 90% accuracy on a distinct validation set.
-We shall therefore use a dynamic data set, as discussed in [Part 2](/2022/01/05/Part_2_Data.html): each grid is used 16 times for training (twice in each orientation), then discarded and replaced by a new one, generated on the spot.
+We shall therefore use a dynamic data set, as discussed in [Part 2]({{ site.baseurl }}/2022/01/05/Part_2_Data.html): each grid is used 16 times for training (twice in each orientation), then discarded and replaced by a new one, generated on the spot.
 
 More epochs are needed to train the model, but the process is more stable and we can therefore use twice the learning rate, namely 0.01. With these parameters the model is doing great! Here is how the accuracy evolves over 200 epochs:
 
-![png](/images/Bacon_accuracy.png 'Accuracy going straight up to 100%!')
+![png]({{ site.baseurl }}/images/Bacon_accuracy.png 'Accuracy going straight up to 100%!')
 
 The final accuracy is 99.9%, above any reasonable expectation.
 
@@ -45,7 +45,7 @@ The different nature of the task also implies that we must use a slightly differ
 
 In summary, the model architecture is made of the same convolutional layers as above, followed by this structure:
 
-![png](/images/Descartes_archi.png 'Same convolutional layers, different ending.')
+![png]({{ site.baseurl }}/images/Descartes_archi.png 'Same convolutional layers, different ending.')
 
 Note that we have also included a rectified linear unit (ReLu) before the average pooling layer to add a non-linearity there.
 
@@ -53,7 +53,7 @@ It turns out that training this model is difficult. So difficult in fact that it
 
 - In the first step, we train the new model on the old problem, starting with pre-trained convolutional layers (they share the same architecture) and randomly-initialized linear layers. This is done precisely as before, except from the fact that we use twice the learning rate (0.02) as most of the parameters are readily trained. The outcome of this procedure is summarized in this figure:
 
-![png](/images/Descartes_binary_accuracy.png 'Many epochs are needed even though the model is partly pre-trained.')
+![png]({{ site.baseurl }}/images/Descartes_binary_accuracy.png 'Many epochs are needed even though the model is partly pre-trained.')
 
 After around 30 epochs of stagnation, the accuracy increases steadily all the way to 99.5%. This is quite a laborious learning curve, given that most of the model was actually pre-trained, but the objective is attained: our new model with an average pooling layer gives an acceptable answer. 
 
@@ -66,7 +66,7 @@ The only tricky point is how do we generate a nice and uniform distribution of l
 
 It turns out that a simple way of getting a pretty good distribution is to play a game at random until the end, then return to an arbitrary intermediate point chosen with uniform probability. This is the distribution of labels that we get in this way after playing 20,000 games:
 
-![png](/images/labels_counting.png 'A nice and uniform distribution.')
+![png]({{ site.baseurl }}/images/labels_counting.png 'A nice and uniform distribution.')
 
 Okay, let's be honest: this is far from being perfectly uniform. But all labels between 0 and 28 have a significant probability of being realized, and that is just what we need. Final configurations with no possible moves are slightly under-represented, but this won't be a problem since we are working with a model that is already pre-trained to detect this special case.
 
@@ -92,7 +92,7 @@ $$
 
 The accuracy of the model is measured comparing $n$ and $n'$. The following figure shows the evolution of the error rate over 500 epochs of training (one epoch corresponds to 100 mini-batches of 200 grids each).
 
-![png](/images/Descartes_error.png 'The error rates, decreasing as the training advances.')
+![png]({{ site.baseurl }}/images/Descartes_error.png 'The error rates, decreasing as the training advances.')
 
 The darker line is the exact error rate (how often $n' \neq n$), and the lighter lines the error rate with a tolerance of $\pm 1$ (how often $\left| n' - n \right| > 1$) and $\pm 2$ (lightest line).
 As you can see, all errors are nicely decreasing as the training advances. After 100 epochs the network already predicts the right number with $\pm 2$ tolerance with 0.1% error. 300 epochs are needed to reach the same accuracy with $\pm 1$ tolerance. Finally, after 500 epochs the network makes an exact prediction more than 98% of the time, and when it fails it is always by at most one move.
@@ -105,14 +105,14 @@ Using dynamical data that is permanently generated as the training goes should p
 
 Well, one way of testing this is to expose the network to grids that it has never seen before. There exists a variant of the game of Morpion Solitaire in which the starting configuration is not a cross, but instead a "pipe":
 
-![png](/images/grid_pipe_empty.png 'A new starting configuration.')
+![png]({{ site.baseurl }}/images/grid_pipe_empty.png 'A new starting configuration.')
 
 There are 24 possible moves in this configuration. The models' prediction in this case is 23.89. That's spot on!
 Playing a number of games starting with this configuration, I could verify that the model works indeed (nearly) perfectly.
 
 ### Looking forward
 
-Of course, the problem addressed here does not require deep learning: counting the number of possible moves for a given configuration is something that can easily be done in an algorithmic way. The neural network is nice as it can compute this number for many grids at once, hence slightly accelerating the process: it will in fact be used in [the next post](/2022/02/04/Part_5_Playing_model.html) to try and improve our initial random exploration algorithm. But the two important goals that have been achieved are different:
+Of course, the problem addressed here does not require deep learning: counting the number of possible moves for a given configuration is something that can easily be done in an algorithmic way. The neural network is nice as it can compute this number for many grids at once, hence slightly accelerating the process: it will in fact be used in [the next post]({{ site.baseurl }}/2022/02/04/Part_5_Playing_model.html) to try and improve our initial random exploration algorithm. But the two important goals that have been achieved are different:
 
 - This is a **proof of principle**: I was able to define a relatively deep model and train it to solve a regression problem that is not so simple. All ingredients needed for tackling the real problem are essentially present here.
 - This is also a valuable model to be later used in a **transfer learning** process. As we saw, this is key for making real progress.

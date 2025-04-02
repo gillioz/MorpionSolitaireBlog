@@ -9,9 +9,7 @@
 title: Deep Learning Morpion Solitaire - Marc Gillioz's blog
 description: Deep learning applied to a nice pen-and-paper game
 github_username: gillioz
-
-# Email and twitter are optional:
-email: marc.gillioz at gmail
+base_url: /MorpionSolitaireBlog
 
 # Set this to true to get LaTeX math equation support
 use_math: True

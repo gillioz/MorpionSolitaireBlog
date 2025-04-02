@@ -10,12 +10,12 @@ And even though the problem is a dumb one, it is quite instructive as a starter.
 
 As this is a very simple problem, the neural net does not need to be very deep. In fact, a single convolutional layer can do most of the work.
 
-The drawback is that the convolutional kernel must be large enough so that a complete segment of 5 points and 4 lines can fit into its receptive field. In terms of [the representation discussed in *Part 2*](/2022/01/05/Part_2_Data.html), this corresponds to a kernel size of 13 x 13 pixels. The first layer of the network will therefore be a convolutional layer with a 13 x 13 kernel, stride 3, and no padding, followed by max pooling. The goal of this layer will be to discover features corresponding to allowed moves in the vertical, horizontal, and both diagonal directions. While in principle only 4 channels are sufficient to do so, in practice these features have a lot of non-trivial structure that are not easy to detect in a stochastic process. We will therefore use many more output channels. Empirical testing shows that 40 is a good number: with less channels, the training tends to converge to a state in which only some of the features are detected (for instance it misses allowed moves in one of the directions).
+The drawback is that the convolutional kernel must be large enough so that a complete segment of 5 points and 4 lines can fit into its receptive field. In terms of [the representation discussed in *Part 2*]({{ site.baseurl }}/2022/01/05/Part_2_Data.html), this corresponds to a kernel size of 13 x 13 pixels. The first layer of the network will therefore be a convolutional layer with a 13 x 13 kernel, stride 3, and no padding, followed by max pooling. The goal of this layer will be to discover features corresponding to allowed moves in the vertical, horizontal, and both diagonal directions. While in principle only 4 channels are sufficient to do so, in practice these features have a lot of non-trivial structure that are not easy to detect in a stochastic process. We will therefore use many more output channels. Empirical testing shows that 40 is a good number: with less channels, the training tends to converge to a state in which only some of the features are detected (for instance it misses allowed moves in one of the directions).
 
 Past this layer, the rest of the neural network only needs to implement a logic OR gate: if any allowed move is detected by the convolutional layer, the final answer is a *yes*; if no allowed move is detected, the final answer is a *no*.
 Few linear layers and channels are sufficient to do so. After some experimentation, we find that the following network architecture is fine for our problem:
 
-![png](/images/Democritus_architecture.png 'Network architecture')
+![png]({{ site.baseurl }}/images/Democritus_architecture.png 'Network architecture')
 
 This is one convolutional layer followed by 3 linear layers, with non-linearities given by max pooling after the first and rectified linear units (ReLu) between subsequent layers. The dimension of each layer's input and output is indicated on to the arrows. Note that the large number of channels after the first layer (40) is immediately taken down to a very small number in the linear layers (4 channels and less).
 
@@ -37,11 +37,11 @@ We use the mean square error as a loss function, keeping in mind that we eventua
 
 This is the behavior of the loss function over 100 epochs of training:
 
-![png](/images/Democritus_loss.png 'A pretty smooth learning curve on a logarithmic scale.')
+![png]({{ site.baseurl }}/images/Democritus_loss.png 'A pretty smooth learning curve on a logarithmic scale.')
 
 The loss decreases steadily, and the decay is even faster towards the end of the training cycle. I could have pushed the fitting procedure a bit further, but looking at the accuracy shows that a plateau has been reached after about 80 epochs:
 
-![png](/images/Democritus_accuracy.png 'Accuracy measures whether the output is larger or smaller than 0.5, and matching the label.')
+![png]({{ site.baseurl }}/images/Democritus_accuracy.png 'Accuracy measures whether the output is larger or smaller than 0.5, and matching the label.')
 
 The final value of the accuracy is 99%.
 It looks like the neural net has learned to answer the question. Yay!
@@ -54,13 +54,13 @@ Of course in this simple case my interest is not so much in the outcome of the t
 
 The shallow net used here is perfect to satisfy my curiosity: since nearly all the magic happens in the first layer, let's take a look at its state after the learning process. Below is a picture of the convolution kernel in all 40 output channels. Each image has a size of 13 x 13 pixels, corresponding to the kernel size. Positive values are shown in blue (the darker the closer to +1), and negative in red (the darker the closer to -1). White pixels indicate kernel values close to zero.
 
-![png](/images/Democritus_convlayer.png 'State of the first layer at the end of the training process.')
+![png]({{ site.baseurl }}/images/Democritus_convlayer.png 'State of the first layer at the end of the training process.')
 
 The first observation is that most of the 40 channels are essentially zero: there are only significant features in 5 channels. Four of these features are obviously testing for the presence of allowed moves in each direction (horizontal, vertical, and both diagonals), whereas the fifth one (the incomplete diagonal in the second row) looks like an abandoned relic of the learning process .
 
 It is also interesting to understand how the testing happens. For this, let us look zoom in on the channel in the third row, fourth column, which looks like this:
 
-![png](/images/Democritus_convlayer_zoom.png 'The state of one of the most interesting channels.')
+![png]({{ site.baseurl }}/images/Democritus_convlayer_zoom.png 'The state of one of the most interesting channels.')
 
 In this kernel the middle column has values close to +1 at the position of grid points (the 5 blue pixels) and -1 at the position of two segments (the 4 red pixels). All others entries are near zero. When this column is superimposed with an allowed move of the grid, the output is +4. In **nearly** all other cases, the output takes a lower value. For instance if any vertical segment is occupied, then at least one of the two segments at either extremity and contributes -2 to the sum. (Note that this strategy is used for the vertical and horizontal moves only; for both diagonal moves all 4 segments contribute negatively to the sum.)
 The logic implemented by the rest of the network is then clear: if the output (minus the bias) after max pooling is +4, then an allowed move has been found.
@@ -76,5 +76,5 @@ On the one hand the situation in which the network gives a wrong answer is rare 
 
 On the other hand, it is also clear that better performances could be obtained with a deeper network. With a single convolutional layer followed by max pooling, obtaining a 100% perfect answer would require to combine different channels in a very non-trivial way, whereas the current training process found a simple alternative in which a single channel detects the presence or absence of an allowed move with 99% accuracy. Adding just one another layer before max pooling would for instance be sufficient to discriminate between the distinct outputs of the first layer (+4 vs. +5 in the case discussed above).
 
-In [the next part](/2022/01/28/Part_4_Counting.html), we will precisely consider such a deeper network and try to answer a slightly more complicated question, before we dive into the core of the problem.
+In [the next part]({{ site.baseurl }}/2022/01/28/Part_4_Counting.html), we will precisely consider such a deeper network and try to answer a slightly more complicated question, before we dive into the core of the problem.
 
